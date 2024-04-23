@@ -46,9 +46,9 @@ If you are an aircraft developer or if you wish to create your own Key Fob, here
 const time = SimVar.GetSimVarValue('E:SIMULATION TIME', 'Seconds');
 const lat = SimVar.GetSimVarValue("PLANE LATITUDE", "Degrees");
 const lon = SimVar.GetSimVarValue("PLANE LONGITUDE", "Degrees");
-this.$api.variables.set('L:rf_remote_ch1_time', 'number', time + 1);
-this.$api.variables.set('L:rf_remote_ch1_lat', 'number', lat);
-this.$api.variables.set('L:rf_remote_ch1_lon', 'number', lon);
+SimVar.SetSimVarValue('L:rf_remote_ch1_time', 'number', time + 1);
+SimVar.SetSimVarValue('L:rf_remote_ch1_lat', 'number', lat);
+SimVar.SetSimVarValue('L:rf_remote_ch1_lon', 'number', lon);
 ```
 
 ## XML Emitter (on Aircraft)
