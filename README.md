@@ -8,35 +8,33 @@ The following code can be inserted in your scenery object. This object has to be
 - Adjust the range as desired (default 0.1km)
 - Change the channel so it is unique to each object. Replace all instances of ``ch1`` to ``ch2,3,4, etc.``)
 ```xml
-<PartInfo>
-	<Name>HangarDoor_Operation</Name>
-	<AnimLength>800</AnimLength>
-	<Animation>
-		<Parameter>
-			<Code>
-				(Z:rf_ch1_lc, number) (L:rf_remote_ch1_time, number) &lt; if{
-					(L:rf_remote_ch1_time, number) (Z:rf_ch1_tt, number) != if{
-						(L:rf_remote_ch1_time, number) (&gt;Z:rf_ch1_tt, number)
-						39.771427571 (L:rf_remote_ch1_lat, number) - abs (&gt;Z:rf_ch1_lat_dist, number)
-						-119.896110241 (L:rf_remote_ch1_lon, number) - abs (&gt;Z:rf_ch1_lon_dist, number)
-						(Z:rf_ch1_lat_dist, number) (Z:rf_ch1_lon_dist, number) + (&gt;Z:rf_ch1_dist, number)
-						(Z:rf_ch1_dist, number) 111.32 * (&gt;Z:rf_ch1_dist, number)
-						(Z:rf_ch1_dist, number) 0.1 &lt; if{
-							(Z:door_ch1_state, number) 1 == if{
-								0 (&gt;Z:door_ch1_state, number)
-							} els{
-								1 (&gt;Z:door_ch1_state, number)
-							}
-						}
-					}
-				}
-				(E:SIMULATION TIME, seconds) (&gt;Z:rf_ch1_lc, number)
-				(Z:door_ch1_state, number) 800 *
-			</Code>
-			<Lag>10</Lag>
-		</Parameter>
-	</Animation>
-</PartInfo>
+<Component ID="HangarDoor" node="HangarDoor">
+    <UseTemplate Name="ASOBO_GT_Anim">
+        <ANIM_NAME>HangarDoor_Operation</ANIM_NAME>
+        <ANIM_LENGTH>800</ANIM_LENGTH>
+        <ANIM_LAG>10</ANIM_LAG>
+        <ANIM_CODE>
+            (Z:rf_ch1_lc, number) (L:rf_remote_ch1_time, number) &lt; if{
+                (L:rf_remote_ch1_time, number) (Z:rf_ch1_tt, number) != if{
+                    (L:rf_remote_ch1_time, number) (&gt;Z:rf_ch1_tt, number)
+                    39.771427571 (L:rf_remote_ch1_lat, number) - abs (&gt;Z:rf_ch1_lat_dist, number)
+                    -119.896110241 (L:rf_remote_ch1_lon, number) - abs (&gt;Z:rf_ch1_lon_dist, number)
+                    (Z:rf_ch1_lat_dist, number) (Z:rf_ch1_lon_dist, number) + (&gt;Z:rf_ch1_dist, number)
+                    (Z:rf_ch1_dist, number) 111.32 * (&gt;Z:rf_ch1_dist, number)
+                    (Z:rf_ch1_dist, number) 0.1 &lt; if{
+                        (Z:door_ch1_state, number) 1 == if{
+                            0 (&gt;Z:door_ch1_state, number)
+                        } els{
+                            1 (&gt;Z:door_ch1_state, number)
+                        }
+                    }
+                }
+            }
+            (E:SIMULATION TIME, seconds) (&gt;Z:rf_ch1_lc, number)
+            (Z:door_ch1_state, number) 800 *
+        </ANIM_CODE>
+    </UseTemplate>
+</Component>
 ```
 
 ## JavaScript Emitter (on Avionics/JS)
